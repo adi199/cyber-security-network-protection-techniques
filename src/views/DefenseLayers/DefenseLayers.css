@@ -1,0 +1,157 @@
+.dl-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .dl-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.dl-diagram {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.dl-internet {
+  fill: var(--node-internet);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Rings get progressively stronger tint toward the core (--depth 0..1). */
+.dl-layer rect {
+  fill: color-mix(in srgb, var(--node-control) calc(6% + var(--depth) * 18%), var(--bg));
+  stroke: color-mix(in srgb, var(--node-control) 45%, var(--bg));
+  stroke-width: 1.5;
+  transition: fill 150ms ease, stroke 150ms ease;
+}
+
+.dl-layer text {
+  fill: var(--fg);
+  font-size: 14px;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.dl-layer {
+  cursor: pointer;
+  outline: none;
+}
+
+.dl-layer:hover > rect {
+  fill: color-mix(in srgb, var(--accent) 30%, var(--bg));
+}
+
+.dl-layer:focus-visible > rect {
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+
+.dl-layer.is-selected > rect {
+  fill: color-mix(in srgb, var(--accent) 45%, var(--bg));
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+
+.dl-layer.is-selected > text {
+  font-weight: 700;
+}
+
+.dl-core rect {
+  fill: color-mix(in srgb, var(--node-asset) 25%, var(--bg));
+  stroke: var(--node-asset);
+  stroke-width: 2;
+}
+
+.dl-core text {
+  fill: var(--fg);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.dl-panel {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+
+.dl-panel h3 {
+  margin: 0 0 4px;
+}
+
+.dl-panel h4 {
+  margin: 16px 0 4px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.app-main .dl-panel p {
+  color: var(--fg);
+  margin: 0 0 8px;
+}
+
+.app-main .dl-panel .dl-step,
+.app-main .dl-panel .dl-tagline {
+  color: var(--muted);
+}
+
+.dl-step {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.dl-tagline {
+  font-style: italic;
+}
+
+.dl-panel ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.dl-example {
+  border-left: 3px solid var(--accent);
+  padding-left: 10px;
+}
+
+.dl-panel button {
+  font: inherit;
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.dl-close {
+  margin-top: 12px;
+}
+
+.dl-list {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}
+
+/* The SVG scales down on phones; enlarge labels so they stay readable. */
+@media (max-width: 760px) {
+  .dl-layer text {
+    font-size: 19px;
+  }
+
+  .dl-core text {
+    font-size: 20px;
+  }
+}
